@@ -17,7 +17,7 @@ namespace Knab.X509Tools
 
             if (result.Groups.Count < 2)
             {
-                throw new SignerUriNotFoundException();
+                throw new SignerUriNotFoundException(certificate);
             }
             var value = result.Groups[1].Captures[0].Value;
             return new Uri(value);
@@ -35,7 +35,7 @@ namespace Knab.X509Tools
                     break;
                 }
             }
-            return data ?? throw new SignerUriNotFoundException();
+            return data ?? throw new SignerUriNotFoundException(certificate);
         }
 
         public static bool IsRoot(this X509Certificate2 certificate)

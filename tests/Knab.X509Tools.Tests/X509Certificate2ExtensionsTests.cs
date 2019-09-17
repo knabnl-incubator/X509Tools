@@ -39,5 +39,15 @@ namespace Knab.X509Tools.Tests
 
             Assert.Throws<SignerUriNotFoundException>(() => cert.GetSignerCertificateUri());
         }
+
+        [Fact]
+        public async Task Should_provide_details_in_the_exception()
+        {
+            var pem = await File.ReadAllBytesAsync("Content\\ca_root.pem");
+            var cert = new X509Certificate2(pem);
+
+            var ex = Assert.Throws<SignerUriNotFoundException>(() => cert.GetSignerCertificateUri());
+            Assert.Equal(ex.Certificate, cert);
+        }
     }
 }
