@@ -12,7 +12,7 @@ namespace Knab.X509Tools
         public static Uri GetSignerCertificateUri(this X509Certificate2 certificate)
         {
             var data = FindAuthorityInformationExtension(certificate);
-            var findUri = new Regex(".+url\\=(.+crt)");
+            var findUri = new Regex(".+ur[li][\\=:]((.+crt)|(.+cer))");
             var result = findUri.Match(data.ToLower());
 
             if (result.Groups.Count < 2)

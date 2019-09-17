@@ -12,6 +12,7 @@ namespace Knab.X509Tools.Tests
         [Theory]
         [InlineData("Content\\client.pem", "http://trust.quovadisglobal.com/qventca2g3.crt")]
         [InlineData("Content\\ca_int.pem", "http://trust.quovadisglobal.com/qvrca2g3.crt")]
+        [InlineData("Content\\client_with_signer_file_cer.pem", "https://cert.pkioverheid.nl/evintermediairca.cer")]
         public async Task Should_find_signer_uri(string certPath, string url)
         {
             var pem = await File.ReadAllBytesAsync(certPath);

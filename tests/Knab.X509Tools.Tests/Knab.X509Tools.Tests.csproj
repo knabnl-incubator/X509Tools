@@ -13,6 +13,7 @@
     <None Remove="Content\chain_client_int_root.pem" />
     <None Remove="Content\chain_int_root.pem" />
     <None Remove="Content\client.pem" />
+    <None Remove="Content\client_with_signer_file_cer.pem" />
   </ItemGroup>
 
   <ItemGroup>
@@ -26,12 +27,15 @@
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\chain_int_root.pem">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\chain_client_int_root.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\client.pem">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Content\client_with_signer_file_cer.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
