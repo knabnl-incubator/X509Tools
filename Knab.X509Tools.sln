@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29209.152
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Knab.X509Tools", "src\Knab.X509Tools\Knab.X509Tools.csproj", "{61820B56-5CD1-479E-BEB8-6B8374532B4A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Knab.X509Tools.Tests", "tests\Knab.X509Tools.Tests\Knab.X509Tools.Tests.csproj", "{4E5F6ED5-B4C8-439C-8D3A-3C728A3233A3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{61820B56-5CD1-479E-BEB8-6B8374532B4A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{61820B56-5CD1-479E-BEB8-6B8374532B4A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{61820B56-5CD1-479E-BEB8-6B8374532B4A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{61820B56-5CD1-479E-BEB8-6B8374532B4A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4E5F6ED5-B4C8-439C-8D3A-3C728A3233A3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4E5F6ED5-B4C8-439C-8D3A-3C728A3233A3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4E5F6ED5-B4C8-439C-8D3A-3C728A3233A3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4E5F6ED5-B4C8-439C-8D3A-3C728A3233A3}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {FADCB75A-EF89-4997-9C35-66F0F8138518}
+	EndGlobalSection
+EndGlobal
