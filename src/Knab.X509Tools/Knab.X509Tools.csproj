@@ -6,7 +6,7 @@
     <Version>0.1.0</Version>
     <Authors>Knab</Authors>
     <Company>Knab</Company>
-    <PackageLicenseExpression>https://raw.githubusercontent.com/knabnl-incubator/X509Tools/master/LICENSE</PackageLicenseExpression>
+    <PackageLicenseExpression></PackageLicenseExpression>
     <PackageProjectUrl>https://github.com/knabnl-incubator/X509Tools</PackageProjectUrl>
     <PackageIconUrl>https://github.com/knabnl/Content/raw/master/knab-logo.png</PackageIconUrl>
     <RepositoryUrl>https://github.com/knabnl-incubator/X509Tools</RepositoryUrl>
