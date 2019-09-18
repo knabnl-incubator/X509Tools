@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using System.Text.RegularExpressions;
@@ -14,7 +15,7 @@ namespace Knab.X509Tools
 
         public X509IssuerCertificateUriFinder()
         {
-            _findActions.Add(x => Regex.Match(x, "https?://.+((.+crt)|(.+cer))").Value);
+            _findActions.Add(x => Regex.Match(x, "https?://.+((.+crt)|(.+cer))$").Value);
             _findActions.Add(x => Regex.Match(x, "https?://.+").Value);
         }
 
@@ -31,10 +32,21 @@ namespace Knab.X509Tools
         public Uri Find(X509Certificate2 certificate)
         {
             var data = FindAuthorityInformationExtension(certificate);
+            var lines = data.Replace("\r", "")
+                            .Split('\n')
+                            .Select(x => x.Trim())
+                            .ToList();
             string url = null;
             foreach(var filter in _findActions)
             {
-                url = filter(data);
+                foreach(var line in lines)
+                {
+                    url = filter(line);
+                    if (!string.IsNullOrEmpty(url))
+                    {
+                        break;
+                    }
+                }
                 if (!string.IsNullOrEmpty(url))
                 {
                     break;
