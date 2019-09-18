@@ -9,10 +9,12 @@ namespace Knab.X509Tools
     public class X509ChainComposer
     {
         private readonly HttpClient _httpClient;
+        private readonly X509IssuerCertificateUriFinder _uriFinder;
 
         public X509ChainComposer(HttpClient httpClient)
         {
             _httpClient = httpClient;
+            _uriFinder = new X509IssuerCertificateUriFinder();
         }
 
         public async Task<string> ComposeChain(string pem)
@@ -30,7 +32,7 @@ namespace Knab.X509Tools
             {
                 return;
             }
-            var uri = certificate.GetSignerCertificateUri();
+            var uri = _uriFinder.Find(certificate);
             var file = await DownloadCertificate(uri, certificate);
             var signer = new X509Certificate2(file);
             await ComposeChain(signer, sb);
