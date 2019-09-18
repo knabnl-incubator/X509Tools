@@ -15,7 +15,6 @@ namespace Knab.X509Tools
 
         public X509IssuerCertificateUriFinder()
         {
-            _findActions.Add(x => Regex.Match(x, "https?://.+((.+\\.crt)|(.+\\.cer)|(.+\\.der))$").Value);
             _findActions.Add(x => Regex.Match(x, "https?://.+").Value);
         }
 
@@ -32,27 +31,25 @@ namespace Knab.X509Tools
         public Uri Find(X509Certificate2 certificate)
         {
             var data = FindAuthorityInformationExtension(certificate);
-            var lines = data.Replace("\r", "")
-                            .Split('\n')
-                            .Select(x => x.Trim())
-                            .ToList();
+            var line = data.Replace("\r", "")
+                           .Split('\n')
+                           .Select(x => x.Trim())
+                           .SkipWhile(x => !x.Contains("1.3.6.1.5.5.7.48.2"))?
+                           .Skip(2)
+                           .FirstOrDefault();
+            if (string.IsNullOrEmpty(line))
+            {
+                throw new SignerUriNotFoundException(certificate);
+            }
             string url = null;
             foreach(var filter in _findActions)
             {
-                foreach(var line in lines)
-                {
-                    url = filter(line);
-                    if (!string.IsNullOrEmpty(url))
-                    {
-                        break;
-                    }
-                }
+                url = filter(line);
                 if (!string.IsNullOrEmpty(url))
                 {
                     break;
                 }
             }
-            
             if(string.IsNullOrEmpty(url))
             {
                 throw new SignerUriNotFoundException(certificate);

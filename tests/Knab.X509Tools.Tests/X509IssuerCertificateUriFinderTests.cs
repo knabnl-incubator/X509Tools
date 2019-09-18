@@ -19,10 +19,9 @@ namespace Knab.X509Tools.Tests
         [InlineData("Content\\client.pem", "http://trust.quovadisglobal.com/qventca2g3.crt")]
         [InlineData("Content\\ca_int.pem", "http://trust.quovadisglobal.com/qvrca2g3.crt")]
         [InlineData("Content\\client_with_signer_file_cer.pem", "https://cert.pkioverheid.nl/EVIntermediairCA.cer")]
-        [InlineData("Content\\signer_v2.pem", "http://ocsp.telesec.de/ocspr")]
         [InlineData("Content\\signer_v3.pem", "http://www.cert.fnmt.es/certs/ACRAIZSERVIDORESSEGUROS.crt")]
-        [InlineData("Content\\signer_v4.pem", "http://ocsp.izenpe.com")]
         [InlineData("Content\\signer_v5.pem", "http://autorite.certigna.fr/certigna.der")]
+        [InlineData("Content\\signer_v6.pem", "http://aia1.netlock.hu/index.cgi?ca=gold")]
         public async Task Should_find_signer_uri(string certPath, string url)
         {
             var pem = await File.ReadAllBytesAsync(certPath);

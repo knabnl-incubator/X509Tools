@@ -14,10 +14,9 @@
     <None Remove="Content\chain_int_root.pem" />
     <None Remove="Content\client.pem" />
     <None Remove="Content\client_with_signer_file_cer.pem" />
-    <None Remove="Content\signer_v2.pem" />
     <None Remove="Content\signer_v3.pem" />
-    <None Remove="Content\signer_v4.pem" />
     <None Remove="Content\signer_v5.pem" />
+    <None Remove="Content\signer_v6.pem" />
   </ItemGroup>
 
   <ItemGroup>
@@ -42,16 +41,13 @@
     <Content Include="Content\client_with_signer_file_cer.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\signer_v2.pem">
-      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
-    </Content>
     <Content Include="Content\signer_v3.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\signer_v4.pem">
+    <Content Include="Content\signer_v5.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
-    <Content Include="Content\signer_v5.pem">
+    <Content Include="Content\signer_v6.pem">
       <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </Content>
   </ItemGroup>
