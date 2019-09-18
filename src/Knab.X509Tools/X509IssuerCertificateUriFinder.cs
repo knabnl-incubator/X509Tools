@@ -15,7 +15,7 @@ namespace Knab.X509Tools
 
         public X509IssuerCertificateUriFinder()
         {
-            _findActions.Add(x => Regex.Match(x, "https?://.+((.+crt)|(.+cer))$").Value);
+            _findActions.Add(x => Regex.Match(x, "https?://.+((.+\\.crt)|(.+\\.cer)|(.+\\.der))$").Value);
             _findActions.Add(x => Regex.Match(x, "https?://.+").Value);
         }
 
