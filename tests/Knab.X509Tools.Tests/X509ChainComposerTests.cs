@@ -18,7 +18,7 @@ namespace Knab.X509Tools.Tests
             var client = new HttpClient();
             var x509 = new X509ChainComposer(client);
             var result = await x509.ComposeChain(caRoot);
-            AssertExt.Equal(expected, result);
+            AssertExt.Equal(expected, result.ToPem());
         }
 
         [Fact]
@@ -37,7 +37,7 @@ namespace Knab.X509Tools.Tests
             var x509 = new X509ChainComposer(client);
             var result = await x509.ComposeChain(caInt);
 
-            AssertExt.Equal(expected, result);
+            AssertExt.Equal(expected, result.ToPem());
         }
 
         [Fact]
@@ -58,7 +58,7 @@ namespace Knab.X509Tools.Tests
             var x509 = new X509ChainComposer(client);
             var result = await x509.ComposeChain(clientPem);
 
-            AssertExt.Equal(expected, result);
+            AssertExt.Equal(expected, result.ToPem());
         }
     }
 }

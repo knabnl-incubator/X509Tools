@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Knab.X509Tools
 {
-    public class X509ChainComposer
+    public partial class X509ChainComposer
     {
         private readonly HttpClient _httpClient;
         private readonly X509IssuerCertificateUriFinder _uriFinder;
@@ -17,25 +17,42 @@ namespace Knab.X509Tools
             _uriFinder = new X509IssuerCertificateUriFinder();
         }
 
-        public async Task<string> ComposeChain(string pem)
+        public async Task<CertificateChain> ComposeChain(string firstCertificateAsPem, string originalUrl = "http://localhost")
         {
-            var sb = new StringBuilder();
-            var x509 = new X509Certificate2(Encoding.ASCII.GetBytes(pem));
-            await ComposeChain(x509, sb);
-            return sb.ToString();
+            var builder = new CertificateChainBuilder();
+            try
+            {
+                using (var x509 = new X509Certificate2(Encoding.ASCII.GetBytes(firstCertificateAsPem)))
+                {
+                    await ComposeChain(builder, x509, "http://localhost");
+                }
+            }
+            catch(SignerUriNotFoundException sunfex)
+            {
+                builder.SetError(CertificateChainStatus.SignerUriNotFound, sunfex);
+            }
+            catch(SignerDownloadException sdex)
+            {
+                builder.SetError(CertificateChainStatus.ErrorDownloadingSigner, sdex);
+            }
+            return builder.Build();
         }
 
-        private async Task ComposeChain(X509Certificate2 certificate, StringBuilder sb)
+        private async Task ComposeChain(CertificateChainBuilder builder, X509Certificate2 x509, string url)
         {
-            sb.AppendLine(certificate.ToPEM());
-            if (certificate.IsRoot())
+            builder.AddItem(x509.ToPEM(), url);
+            if (x509.IsRoot())
             {
                 return;
             }
-            var uri = _uriFinder.Find(certificate);
-            var file = await DownloadCertificate(uri, certificate);
-            var signer = new X509Certificate2(file);
-            await ComposeChain(signer, sb);
+            
+            var uri = _uriFinder.Find(x509);
+            var file = await DownloadCertificate(uri, x509);
+            
+            using (var signer = new X509Certificate2(file))
+            {
+                await ComposeChain(builder, signer, uri.ToString());
+            }
         }
 
         private async Task<byte[]> DownloadCertificate(Uri uri, X509Certificate2 certificate)

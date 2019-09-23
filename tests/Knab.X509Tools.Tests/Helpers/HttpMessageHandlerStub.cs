@@ -1,6 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Net;
 using System.Net.Http;
+using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -15,7 +16,7 @@ namespace Knab.X509Tools.Tests.Helpers
             return Task.FromResult(new HttpResponseMessage()
             {
                 StatusCode = HttpStatusCode.OK,
-                Content = new StringContent(_responseMap[request.RequestUri.ToString()])
+                Content = new StringContent(_responseMap[request.RequestUri.ToString()], Encoding.UTF8)
             });
         }
 
